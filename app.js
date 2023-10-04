@@ -33,15 +33,6 @@ const products = [
   }
 
   function renderProducts() {
-    let prod1 = randomProdIDx();
-    let prod2 = randomProdIDx();
-    let prod3 = randomProdIDx();
-
-    while (prod1 === prod2 || prod1 === prod3 || prod2 === prod3) {}
-
-  }
-
-  function renderProducts() {
     
     let prod1 = randomProdIdx();
     let prod2 = randomProdIdx();
@@ -88,8 +79,6 @@ for (let i = 0; i < products.length; i++) {
     }
 
 
-
-
 renderProducts();
 
 }
@@ -111,7 +100,6 @@ for (let i = 0; i < products.length; i++) {
     li.textContent = `${product.name} was viewed ${product.views} times, and clicked ${product.clicks} times`;
     results.appendChild(li);
 
-
 }
 
 const viewResults = document.getElementById("view-results");
@@ -119,4 +107,51 @@ viewResults.addEventListener("click", showResults);
 
 renderProducts();
 
+img1.addEventListener("click", handleImgClick);
+img2.addEventListener("click", handleImgClick);
+img3.addEventListener("click", handleImgClick);
 
+function showResults() {
+
+  const results = document.getElementById("results");
+
+  for (let i = 0; i < products.length; i++) {
+    const li = document.createElement("li");
+    const product = products[i];
+    li.textContent = `${product.name} was viewed ${product.views} times, and clicked ${product.clicks} times`;
+    results.appendChild(li);
+  }
+}
+
+const viewResults = document.getElementById("view-results");
+viewResults.addEventListener("click", showResults);
+
+renderProducts();
+
+function renderChart() {
+  const ctx = document.getElementById("myChart");
+
+  const labels = [];
+  const views = [];
+  const clicks = [];
+
+  for (let i = 0; i < products.length; i++) {
+    labels.push(products[i].name);
+    views.push(products[i].views);
+    clicks.push(products[i].clicks);
+  }
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "# of views",
+          data: views,
+          borderWidth: 1,
+        },
+      ],
+    },
+  });
+}
