@@ -1,16 +1,21 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+
 header {
   background-color: mintcream;
   border-style: dashed;
   border-width: 1rem;
   border-color:black;
   text-align: center;
+  background-image: url("https://images.unsplash.com/photo-1536532184021-da5392b55da1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Ymx1ZSUyMHNreXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80;")
+
 }
 
 #MainTitle {
-  font-family: ;
+  font-family: 'Pixelify Sans', cursive;
   font-weight: 700;
   font-size:xx-large;
-  color: purple;
+  color: blanchedalmond;
   justify-content: center;
 }
 img {
@@ -20,11 +25,6 @@ img {
 
 }
 
-#sky {
-  opacity: 50%;
-  background-image: https://images.unsplash.com/photo-1536532184021-da5392b55da1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Ymx1ZSUyMHNreXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80;
-  height: 100%
-}
 
 
 body {
@@ -34,6 +34,7 @@ background-color: blanchedalmond;
 
 h2 {
   align-items: center;
+  font-family: 'Pixelify Sans', cursive; 
 }
 
 

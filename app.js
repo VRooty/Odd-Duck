@@ -19,26 +19,24 @@ function Product(name)  {
 
 
 if (localStorage.getItem("products") === null) {
-[
-    new Product("bag"),
-    new Product("banana"),
-    new Product("bathroom"),
-    new Product("boots"),
-    new Product("breakfast"),
-    new Product("bubblegum"),
-    new Product("chair"),
-    new Product("cthulhu"),
-    new Product("dog-duck"),
-    new Product("dragon"),
-    new Product("pen"),
-  ];
-}
-
-else {
+  [
+      new Product("bag"),
+      new Product("banana"),
+      new Product("bathroom"),
+      new Product("boots"),
+      new Product("breakfast"),
+      new Product("bubblegum"),
+      new Product("chair"),
+      new Product("cthulhu"),
+      new Product("dog-duck"),
+      new Product("dragon"),
+      new Product("pen"),
+    ]
+} else {
   const productsLS = JSON.parse(localStorage.getItem("products"));
-
   for (let i = 0; i < productsLS.length; i++) {
     new Product(productsLS[i].name, productsLS[i].views, productsLS[i].clicks);
+  }
 }
 
   function randomProdIdx() {
@@ -77,7 +75,7 @@ function handleImgClick(event) {
     if (userClicks === maxClicks) {
       alert("You have run out of votes");
       showResults()
-      renderChart()
+    
       return;
     }
     let clickedProduct = event.target.alt;
@@ -88,39 +86,12 @@ function handleImgClick(event) {
         products[i].clicks++;
       }
 }
+  renderProducts();
 
-
-
-renderProducts();
-
-localStorage.setItem("products", JSON.stringify(products));
-return;
+  localStorage.setItem("products", JSON.stringify(products));
+  return;
 
 }
-
-
-
-img1.addEventListener("click", handleImgClick);
-img2.addEventListener("click", handleImgClick);
-img3.addEventListener("click", handleImgClick);
-
-function showResults() {
-
-    const results = document.getElementById("results");
-
-    for (let i = 0; i < products.length; i++) {
-      const li = document.createElement("li");
-      const product = products[i];
-      li.textContent = `${product.name} was viewed ${product.views} times, and clicked ${product.clicks} times`;
-      results.appendChild(li);
-  
-  }
-  
-  const viewResults = document.getElementById("view-results");
-  viewResults.addEventListener("click", showResults);
-
-}
-
 
 renderProducts();
 
@@ -142,31 +113,3 @@ function showResults() {
 }
 
 renderProducts();
-
-function renderChart() {
-  const ctx = document.getElementById("myChart");
-
-  const labels = [];
-  const views = [];
-  const clicks = [];
-
-  for (let i = 0; i < products.length; i++) {
-    labels.push(products[i].name);
-    views.push(products[i].views);
-    clicks.push(products[i].clicks);
-  }
-
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: labels,
-      datasets: [
-        {
-          label: "# of views",
-          data: views,
-          borderWidth: 1,
-        },
-      ],
-    },
-  });
-}
