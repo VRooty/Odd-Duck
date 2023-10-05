@@ -5,16 +5,21 @@ const img3 = document.getElementById("img3")
 let userClicks = 0;
 let maxClicks = 25;
 
+products = []
+
 function Product(name)  {
     this.name = name;
     this.src = `./images/${name}.jpg`; 
     this.views = 0;
     this.clicks = 0;
 
+    products.push(this);
+
 }
 
 
-const products = [
+if (localStorage.getItem("products") === null) {
+[
     new Product("bag"),
     new Product("banana"),
     new Product("bathroom"),
@@ -27,6 +32,14 @@ const products = [
     new Product("dragon"),
     new Product("pen"),
   ];
+}
+
+else {
+  const productsLS = JSON.parse(localStorage.getItem("products"));
+
+  for (let i = 0; i < productsLS.length; i++) {
+    new Product(productsLS[i].name, productsLS[i].views, productsLS[i].clicks);
+}
 
   function randomProdIdx() {
     return Math.floor(Math.random() * products.length);
@@ -64,6 +77,7 @@ function handleImgClick(event) {
     if (userClicks === maxClicks) {
       alert("You have run out of votes");
       showResults()
+      renderChart()
       return;
     }
     let clickedProduct = event.target.alt;
@@ -79,7 +93,12 @@ function handleImgClick(event) {
 
 renderProducts();
 
+localStorage.setItem("products", JSON.stringify(products));
+return;
+
 }
+
+
 
 img1.addEventListener("click", handleImgClick);
 img2.addEventListener("click", handleImgClick);
@@ -119,8 +138,8 @@ function showResults() {
     li.textContent = `${product.name} was viewed ${product.views} times, and clicked ${product.clicks} times`;
     results.appendChild(li);
   }
-}
 
+}
 
 renderProducts();
 
